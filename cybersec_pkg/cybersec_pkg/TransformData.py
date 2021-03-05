@@ -75,3 +75,45 @@ def transform_section(df_flat):
     df_section.drop(df_section.columns[df_section.columns.str.contains('section_entry')], axis=1, inplace=True)
 
     return df_section
+
+
+def transform_data_directories(df_flat):
+    """
+    Function selects most important columns based on field knowledge (removing virtual size columns) and their correlation with label
+    inputs:
+        df_flat: flatten dataframe
+    output:
+        df_data_directories: dataframe with only most important columns
+    """
+    
+    # selecting data directories columns
+    df_data_directories = df_flat[df_flat.columns[df_flat.columns.str.startswith('datadirectories')]].copy()
+    
+    # removing columns describing virtual size
+    df_data_directories.drop(df_data_directories.columns[df_data_directories.columns.str.contains('_vsize')], axis=1, inplace=True)
+    
+    # removing columns with correlation with label close to 0
+    data_directories_to_drop = ['datadirectories_EXCEPTION_TABLE_size', 'datadirectories_CERTIFICATE_TABLE_size', 
+                               'datadirectories_ARCHITECTURE_size', 'datadirectories_LOAD_CONFIG_TABLE_size',
+                               'datadirectories_BOUND_IMPORT_size', 'datadirectories_IAT_size', 'datadirectories_CLR_RUNTIME_HEADER_size']
+    df_data_directories.drop(data_directories_to_drop, axis=1, inplace=True)
+    
+    return df_data_directories
+
+def transform_byte_entropy(df_flat):
+    """
+    Function calculates average of most important columns basend on their correlation with label. All these columns cannot be
+    taken into consideration, because they have a very strong correlation with each other (~ 0.99)
+    inputs:
+        df_flat: flatten dataframe
+    output:
+        average_of_bytes_240_255: one column containing average of most important columns
+    """
+    
+    # selecting byte entropy columns
+    df_data_directories = df_flat[df_flat.columns[df_flat.columns.str.startswith('byteentropy')]].copy()
+    
+    # calculating average of most important columns
+    average_of_bytes_240_255 = (df_data_directories.loc[:,'byteentropy_240':'byteentropy_255'].sum(axis=1))/16
+    
+    return average_of_bytes_240_255
