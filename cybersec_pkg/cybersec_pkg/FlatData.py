@@ -246,6 +246,24 @@ def get_features_from_datadirectories(sample):
             dict_others_datadir.update({"datadirectories_" + element_name + "_" + position: element[position]})
     return dict_others_datadir
 
+# Extraction IMPORTS column
+
+def get_features_from_imports(sample):
+    """
+    input:
+        data: data
+    output:
+        sum_others_datadir: list of functions from every dll
+    """
+    functions_list = []
+    imports = sample["imports"]
+
+    for key in imports.keys():
+        functions = imports[key]
+        values = ['imports.' + key.lower() + "-" + f_name for f_name in functions]
+        functions_list.append(values)
+    functions_list = [item for sublist in functions_list for item in sublist]
+    return {'imports': functions_list}
 
 def write_csv(csv_file_path, sample_list):
     """
