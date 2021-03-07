@@ -118,6 +118,24 @@ def transform_byte_entropy(df_flat):
     
     return average_of_bytes_240_255
     
+def transform_histogram(df_flat):
+    """
+    Function that extracts max value from whole histogram which should be the value which is the most correlated 
+    with malicious label
+    inputs:
+        df_flat: flatten dataframe
+    output:
+        max_hist: one column containing maximum value from whole histogram
+    """
+    
+    # selecting histogram columns
+    temporal = df_flat[df_flat.columns[df_flat.columns.str.startswith('histogram')]].copy()
+    
+    # calculating max value from histograms
+    max_hist = (temporal.loc[:,'histogram_0':'histogram_255'].max(axis=1)
+    
+    return max_hist
+
     
 def transform_imports(df_flat):
     """
