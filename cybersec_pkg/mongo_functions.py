@@ -1,4 +1,4 @@
-# from pymongo import MongoClient
+from pymongo import MongoClient
 
 
 def select_label_01(collection, n=1):
