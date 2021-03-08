@@ -7,7 +7,7 @@ def transform_general(df_flat):
         df_cleaned: reduced dataset
     """
     # filter columns general related
-    df_general = df_flat[['general_size','general_vsize','general_has_debug','general_exports','general_imports','general_has_relocations','general_has_resources','general_has_signature','general_has_tls','general_symbols']]
+    df_general = df_flat[['general_size','general_vsize','general_has_debug','general_exports','general_imports','general_has_relocations','general_has_resources','general_has_signature','general_has_tls','general_symbols']].copy()
     
      # drop columns with exports,imports,symbols
     df_general.drop('general_exports', axis=1, inplace=True)

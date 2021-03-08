@@ -61,7 +61,7 @@ def transform_section(df_flat):
     # create new column: section_high_entropy ratio
     df_section['section_high_entropy_ratio'] = df_section['section_high_entropy_cnt'] / df_section['section_cnt']
 
-    # create new column: max section entropy
+    # create new column: _ section entropy
     df_section['section_entropy_max'] = df_section[df_section.columns[df_section.columns.str.contains('_entropy')]].max(
         axis=1)
 
@@ -132,7 +132,7 @@ def transform_histogram(df_flat):
     temporal = df_flat[df_flat.columns[df_flat.columns.str.startswith('histogram')]].copy()
     
     # calculating max value from histograms
-    max_hist = (temporal.loc[:,'histogram_0':'histogram_255'].max(axis=1)
+    max_hist = temporal.loc[:,'histogram_0':'histogram_255'].max(axis=1)
     
     return max_hist
 
