@@ -105,9 +105,9 @@ def get_simple_column(sample, columns=["sha256", "md5", "appeared", "label", "av
     return simple_dict
 
 
-# Extraction columns with list: "histogram", "byteentropy", "exports"
+# Extraction columns with list: "histogram", "byteentropy"
 
-def get_simple_list_from_column(sample, columns=["histogram", "byteentropy", "exports"]):
+def get_simple_list_from_column(sample, columns=["histogram", "byteentropy"]):
     """
     input:
         data: variable with dataset
@@ -116,19 +116,13 @@ def get_simple_list_from_column(sample, columns=["histogram", "byteentropy", "ex
         final_list: list of dicts, one list's element is a one sample of dataset
     """
 
-    dict_exports = {}
     dict_others = {}
     dict_final = {}
 
     for column in columns:
-        if column == "exports":
-            dict_exports.update({column + "_" + str(v).lower(): True for v in sample[column]})
-        else:
-            dict_others.update({column + "_" + str(i): n for i, n in enumerate(sample[column])})
+        dict_others.update({column + "_" + str(i): n for i, n in enumerate(sample[column])})
 
     dict_final.update(dict_others)
-    dict_final.update(dict_exports)
-
     return dict_final
 
 
@@ -265,20 +259,43 @@ def get_features_from_imports(sample):
     functions_list = [item for sublist in functions_list for item in sublist]
     return {'imports': functions_list}
 
-def write_csv(csv_file_path, sample_list):
+def write_csv_from_json(csv_file_path, sample_list):
     """
     Args:
         csv_file_path: destination path of csv file
         sample_list: list of dicts
     """
-    all_keys = set().union(*(d.keys() for d in flatten_dataset))
+    all_keys = set().union(*(d.keys() for d in sample_list))
 
     try:
         with open(csv_file_path, 'w') as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=all_keys)
             writer.writeheader()
-            for data in flatten_dataset:
+            for data in sample_list:
                 writer.writerow(data)
     except IOError:
         print("I/O error")
 
+
+def write_csv(csv_file_path, dataframe):
+    """
+    Args:
+        csv_file_path: destination path of csv file
+        dataframe: dataframe
+    """
+    all_keys = set().union(*(d.keys() for d in sample_list))
+
+    try:
+        with open(csv_file_path, 'w') as csvfile:
+            writer = csv.DictWriter(csvfile, fieldnames=all_keys)
+            writer.writeheader()
+            for data in sample_list:
+                writer.writerow(data)
+    except IOError:
+        print("I/O error")
+        
+        
+        
+        
+        
+        

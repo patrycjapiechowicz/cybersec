@@ -136,31 +136,14 @@ def transform_histogram(df_flat):
     
     return max_hist
 
-    
-def transform_imports(df_flat):
-    """
-    Function changes Nan to 0 for imports
-    inputs:
-        df_flat: flatten dataframe
-    output:
-        import_columns: imports changed to 0/1 version
-    """
-    
-    # selecting imports columns
-    df_imports = df_flat.filter(regex='label|imports.').copy()
-    
-    # fill Nan to False
-    df_imports = df_imports.fillna(False)
-    
-    return df_imports
 
-def transform_imports_v2(df_flat):
+def transform_imports(df_flat):
     """
     Function checks if contains known malicious functions
     inputs:
         df_flat: flatten dataframe
     output:
-        contains_malicious_imports: column with True if contains functions, False 
+        contains_malicious_imports: column with 1 if contains functions, 0 
     """
     malicious_functions = ['imports.kernel32.dll-MapViewOfFile', 'imports.kernel32.dll-IsDebuggerPresent',
                            'imports.kernel32.dll-GetThreadContext', 'imports.kernel32.dll-ReadProcessMemory',
@@ -172,6 +155,6 @@ def transform_imports_v2(df_flat):
                            'imports.advapi32.dll-CryptAcquireContextW', 'imports.advapi32.dll-DuplicateTokenEx',
                            'imports.crypt32.dll-CertDuplicateCertificateContext']
 
-    df_contains_malisious_functions = df_flat.apply(
-        lambda row: True if any([item in row['imports'] for item in malicious_functions]) else False, axis=1)
-    return df_contains_malisious_functions    
+    df_contains_malicious_functions = df_flat.apply(
+        lambda row: 1 if any([item in row['imports'] for item in malicious_functions]) else 0, axis=1)
+    return pd.DataFrame(df_contains_malicious_functions, columns=['has_suspicious_dll'])    
