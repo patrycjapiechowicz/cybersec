@@ -1,6 +1,6 @@
-from flat_general_strings import *
-from FlatData import *
-from TransformData import *
+from cybersec_pkg.flat_general_strings import *
+from cybersec_pkg.FlatData import *
+from cybersec_pkg.TransformData import *
 
 
 def run_transformer(data):
