@@ -35,7 +35,11 @@ def run_transformer(data):
 
     # nothing reduced, this will be reduced in 2nd phase
     df_header = df_flat[df_flat.columns[df_flat.columns.str.startswith('header_')]].copy()
-
+    df_header.fillna(False ,inplace = True)
+    col = df_header.columns[df_header.columns.str.startswith(('header_coff_characteristics','header_optional_dll'))]
+    df_header.loc[:,col] = df_header.loc[:,col].astype('int64')
+    
+    
     # transform strings
     df_strings = transform_strings(df_flat)
 
