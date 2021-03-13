@@ -1,10 +1,12 @@
+"""transform data"""
 import numpy as np
 import pandas as pd
 
 
-def get_non_standard_section_ratio(row, good_sections=[]):
+def get_non_standard_section_ratio(row, good_sections=None):
     """
-    Functions returns ratio of non standard sections in sections field. This function is used in apply
+    Functions returns ratio of non standard sections in sections field.
+     This function is used in apply
     Args:
         row: row of df
         good_sections: list of section names considered as normal/standard
@@ -13,6 +15,8 @@ def get_non_standard_section_ratio(row, good_sections=[]):
 
     """
 
+    if good_sections is None:
+        good_sections = []
     labels = row[~np.isnan(row)].index
 
     list_of_names = [
@@ -23,8 +27,8 @@ def get_non_standard_section_ratio(row, good_sections=[]):
 
     if len(list_of_names) == 0:
         return np.NaN
-    else:
-        return len(proper_filter) / len(list_of_names)
+
+    return len(proper_filter) / len(list_of_names)
 
 
 def transform_section(df_flat):
@@ -116,7 +120,8 @@ def transform_section(df_flat):
 
 def transform_data_directories(df_flat):
     """
-    Function selects most important columns based on field knowledge (removing virtual size columns) and their correlation with label
+    Function selects most important columns based on field knowledge
+     (removing virtual size columns) and their correlation with label
     inputs:
         df_flat: flatten dataframe
     output:
@@ -152,8 +157,9 @@ def transform_data_directories(df_flat):
 
 def transform_byte_entropy(df_flat):
     """
-    Function calculates average of most important columns basend on their correlation with label. All these columns cannot be
-    taken into consideration, because they have a very strong correlation with each other (~ 0.99)
+    Function calculates average of most important columns basend on their correlation with label.
+     All these columns cannot be taken into consideration, because they have a very strong
+      correlation with each other (~ 0.99)
     inputs:
         df_flat: flatten dataframe
     output:
@@ -175,8 +181,8 @@ def transform_byte_entropy(df_flat):
 
 def transform_histogram(df_flat):
     """
-    Function that extracts max value from whole histogram which should be the value which is the most correlated
-    with malicious label
+    Function that extracts max value from whole histogram which should be
+     the value which is the most correlated with malicious label
     inputs:
         df_flat: flatten dataframe
     output:
@@ -224,7 +230,7 @@ def transform_imports(df_flat):
 
     df_contains_malicious_functions = df_flat.apply(
         lambda row: 1
-        if any([item in row["imports"] for item in malicious_functions])
+        if any(item in row["imports"] for item in malicious_functions)
         else 0,
         axis=1,
     )

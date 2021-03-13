@@ -1,3 +1,4 @@
+"""flat general strings script"""
 def transform_general(df_flat):
     """
     Function transform column general and strings

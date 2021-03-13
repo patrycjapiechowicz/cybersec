@@ -8,8 +8,8 @@ def test_select_label_01():
     client = MongoClient(
         "mongodb://cybersec:cybersec2021@146.59.3.95:27017/?authSource=cybersec"
     )
-    db = client.cybersec
-    col = db.cybersec
+    test_db = client.cybersec
+    col = test_db.cybersec
     cursor_list = select_label_01(col, 100)
     id_doc_100th = cursor_list[99]["_id"]
 

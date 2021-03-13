@@ -1,8 +1,6 @@
+""" flat data script """
 import csv
 import json
-
-import pandas as pd
-
 
 def read_data(path, limiter):
     """
@@ -65,40 +63,10 @@ def transform_list(json_list):
     result_dict.update({i: True for i in json_list})
     return result_dict
 
-
-def flatten_json(y, separator=""):
-    """
-    Args:
-        y: json object
-        separator: separator
-
-    Returns:
-        functions_dict: dict with flatten values
-    """
-    out = {}
-
-    def flatten(x, name=separator):
-        if type(x) is dict:
-            for a in x:
-                flatten(x[a], name + a + "_")
-        elif type(x) is list:
-            i = 0
-            for a in x:
-                flatten(a, name + str(i) + "_")
-                i += 1
-        else:
-            out[name[:-1]] = x
-
-    flatten(y)
-    return out
-
-
 # Extract "sha256", "md5", "appeared", "label" and "avclass" columns to a flat form
 
 
-def get_simple_column(
-    sample, columns=["sha256", "md5", "appeared", "label", "avclass"]
-):
+def get_simple_column(sample, columns=None):
     """
     input:
         data: variable with dataset
@@ -106,6 +74,8 @@ def get_simple_column(
     output:
         final_list: list of dicts, one list's element is a one sample of dataset
     """
+    if columns is None:
+        columns = ["sha256", "md5", "appeared", "label", "avclass"]
     simple_dict = {}
     simple_dict.update({column: sample[column] for column in columns})
     return simple_dict
@@ -114,7 +84,7 @@ def get_simple_column(
 # Extraction columns with list: "histogram", "byteentropy"
 
 
-def get_simple_list_from_column(sample, columns=["histogram", "byteentropy"]):
+def get_simple_list_from_column(sample, columns=None):
     """
     input:
         data: variable with dataset
@@ -123,6 +93,8 @@ def get_simple_list_from_column(sample, columns=["histogram", "byteentropy"]):
         final_list: list of dicts, one list's element is a one sample of dataset
     """
 
+    if columns is None:
+        columns = ["histogram", "byteentropy"]
     dict_others = {}
     dict_final = {}
 
@@ -193,15 +165,15 @@ def get_features_from_header(sample):
     dict_others = {}
     dict_final = {}
 
-    for h in headers.keys():
-        temp = headers[h]
+    for header in headers.keys():
+        temp = headers[header]
         for k in temp.keys():
 
             if isinstance(temp[k], list):
                 dict_lists.update(
                     {
                         "header_"
-                        + h.lower()
+                        + header.lower()
                         + "_"
                         + k.lower()
                         + "_"
@@ -210,7 +182,7 @@ def get_features_from_header(sample):
                     }
                 )
             else:
-                dict_others.update({"header_" + h.lower() + "_" + k.lower(): temp[k]})
+                dict_others.update({"header_" + header.lower() + "_" + k.lower(): temp[k]})
 
     dict_final.update(dict_lists)
     dict_final.update(dict_others)
