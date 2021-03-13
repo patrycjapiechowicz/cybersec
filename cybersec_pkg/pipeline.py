@@ -1,6 +1,6 @@
-from flat_general_strings import *
-from FlatData import *
-from TransformData import *
+from .flat_data import *
+from .flat_general_strings import *
+from .transform_data import *
 
 
 def run_transformer(data):
@@ -34,13 +34,15 @@ def run_transformer(data):
     df_section = transform_section(df_flat)
 
     # nothing reduced, this will be reduced in 2nd phase
-    df_header = df_flat[df_flat.columns[df_flat.columns.str.startswith('header_')]].copy()
+    df_header = df_flat[
+        df_flat.columns[df_flat.columns.str.startswith("header_")]
+    ].copy()
 
     # transform strings
     df_strings = transform_strings(df_flat)
 
     # transform general
-    df_general=transform_general(df_flat)
+    df_general = transform_general(df_flat)
 
     # transform data directories
     df_data_directories = transform_data_directories(df_flat)
@@ -55,12 +57,26 @@ def run_transformer(data):
     df_imports = transform_imports(df_flat)
 
     # transform label
-    df_label = df_flat['label'].copy()
+    df_label = df_flat["label"].copy()
 
     # final dataframe
 
-    final = pd.concat([df_label, df_flat['sha256'], df_section, df_header, df_strings, df_general, df_data_directories, df_byte_entropy, df_histogram, df_imports], axis = 1)
+    final = pd.concat(
+        [
+            df_label,
+            df_flat["sha256"],
+            df_section,
+            df_header,
+            df_strings,
+            df_general,
+            df_data_directories,
+            df_byte_entropy,
+            df_histogram,
+            df_imports,
+        ],
+        axis=1,
+    )
 
-    final.columns = [x.replace("-","_") for x in final.columns]
+    final.columns = [x.replace("-", "_") for x in final.columns]
 
     return final
