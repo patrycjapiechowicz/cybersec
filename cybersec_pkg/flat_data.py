@@ -1,7 +1,6 @@
-import json
-import pandas as pd
+""" flat data script """
 import csv
-
+import json
 
 def read_data(path, limiter):
     """
@@ -25,11 +24,13 @@ def transform_dll_imports(json_sample):
     Returns:
         functions_dict: dict with all dll functions name with value True
     """
-    imports = sample["imports"]
+    imports = json_sample["imports"]
     functions_dict = {}
     for key in imports.keys():
         functions = imports[key]
-        functions_with_values = {key.lower() + "-" + f_name: True for f_name in functions}
+        functions_with_values = {
+            key.lower() + "-" + f_name: True for f_name in functions
+        }
         functions_dict.update(functions_with_values)
     return functions_dict
 
@@ -62,37 +63,10 @@ def transform_list(json_list):
     result_dict.update({i: True for i in json_list})
     return result_dict
 
-
-def flatten_json(y, separator=''):
-    """
-    Args:
-        y: json object
-        separator: separator
-
-    Returns:
-        functions_dict: dict with flatten values
-    """
-    out = {}
-
-    def flatten(x, name=separator):
-        if type(x) is dict:
-            for a in x:
-                flatten(x[a], name + a + '_')
-        elif type(x) is list:
-            i = 0
-            for a in x:
-                flatten(a, name + str(i) + '_')
-                i += 1
-        else:
-            out[name[:-1]] = x
-
-    flatten(y)
-    return out
-
-
 # Extract "sha256", "md5", "appeared", "label" and "avclass" columns to a flat form
 
-def get_simple_column(sample, columns=["sha256", "md5", "appeared", "label", "avclass"]):
+
+def get_simple_column(sample, columns=None):
     """
     input:
         data: variable with dataset
@@ -100,6 +74,8 @@ def get_simple_column(sample, columns=["sha256", "md5", "appeared", "label", "av
     output:
         final_list: list of dicts, one list's element is a one sample of dataset
     """
+    if columns is None:
+        columns = ["sha256", "md5", "appeared", "label", "avclass"]
     simple_dict = {}
     simple_dict.update({column: sample[column] for column in columns})
     return simple_dict
@@ -107,7 +83,8 @@ def get_simple_column(sample, columns=["sha256", "md5", "appeared", "label", "av
 
 # Extraction columns with list: "histogram", "byteentropy"
 
-def get_simple_list_from_column(sample, columns=["histogram", "byteentropy"]):
+
+def get_simple_list_from_column(sample, columns=None):
     """
     input:
         data: variable with dataset
@@ -116,17 +93,22 @@ def get_simple_list_from_column(sample, columns=["histogram", "byteentropy"]):
         final_list: list of dicts, one list's element is a one sample of dataset
     """
 
+    if columns is None:
+        columns = ["histogram", "byteentropy"]
     dict_others = {}
     dict_final = {}
 
     for column in columns:
-        dict_others.update({column + "_" + str(i): n for i, n in enumerate(sample[column])})
+        dict_others.update(
+            {column + "_" + str(i): n for i, n in enumerate(sample[column])}
+        )
 
     dict_final.update(dict_others)
     return dict_final
 
 
 # Extraction IMPORTS, GENERAL and STRINGS columns
+
 
 def get_features_from_dict_column(sample, columns="imports"):
     """
@@ -146,9 +128,19 @@ def get_features_from_dict_column(sample, columns="imports"):
         content = feature[key]
         if isinstance(content, list) and len(content) != 0:
             if not isinstance(content[0], str):
-                temp1.update({columns + "_" + key.lower() + "-" + str(i): cont for i, cont in enumerate(content)})
+                temp1.update(
+                    {
+                        columns + "_" + key.lower() + "-" + str(i): cont
+                        for i, cont in enumerate(content)
+                    }
+                )
             else:
-                temp2.update({columns + "_" + key.lower() + "-" + str(cont).lower(): True for cont in content})
+                temp2.update(
+                    {
+                        columns + "_" + key.lower() + "-" + str(cont).lower(): True
+                        for cont in content
+                    }
+                )
         else:
             temp3.update({columns + "_" + key: content})
 
@@ -159,6 +151,7 @@ def get_features_from_dict_column(sample, columns="imports"):
 
 
 # Extraction HEADER column
+
 
 def get_features_from_header(sample):
     """
@@ -172,14 +165,24 @@ def get_features_from_header(sample):
     dict_others = {}
     dict_final = {}
 
-    for h in headers.keys():
-        temp = headers[h]
+    for header in headers.keys():
+        temp = headers[header]
         for k in temp.keys():
 
             if isinstance(temp[k], list):
-                dict_lists.update({"header_"+h.lower()+"_"+k.lower()+"_"+str(t).lower():True for t in temp[k]})
+                dict_lists.update(
+                    {
+                        "header_"
+                        + header.lower()
+                        + "_"
+                        + k.lower()
+                        + "_"
+                        + str(t).lower(): True
+                        for t in temp[k]
+                    }
+                )
             else:
-                dict_others.update({"header_"+h.lower()+"_"+k.lower():temp[k]})
+                dict_others.update({"header_" + header.lower() + "_" + k.lower(): temp[k]})
 
     dict_final.update(dict_lists)
     dict_final.update(dict_others)
@@ -190,6 +193,7 @@ def get_features_from_header(sample):
 
 # Extraction Section column
 
+
 def get_features_from_section(sample):
     """
     input:
@@ -198,23 +202,38 @@ def get_features_from_section(sample):
         list_final: list of dicts
     """
 
-    section_entry = sample['section']['entry']  # .text
-    section_sections = sample['section']['sections']
+    section_entry = sample["section"]["entry"]  # .text
+    section_sections = sample["section"]["sections"]
     dict_lists_sections = {}
     dict_others_sections = {}
     dict_final = {}
     simple_dict = {}
-    simple_dict.update({'section_entry': section_entry})
+    simple_dict.update({"section_entry": section_entry})
 
     for part in section_sections:
-        name = part['name']
-        for position in ['size', 'entropy', 'vsize', 'props']:
-            if position == 'props':
+        name = part["name"]
+        for position in ["size", "entropy", "vsize", "props"]:
+            if position == "props":
                 dict_lists_sections.update(
-                    {"section_sections_" + name.lower() + "_" + position + "_" + str(element).lower(): True for element
-                     in part[position]})
+                    {
+                        "section_sections_"
+                        + name.lower()
+                        + "_"
+                        + position
+                        + "_"
+                        + str(element).lower(): True
+                        for element in part[position]
+                    }
+                )
             else:
-                dict_others_sections.update({"section_sections_" + name.lower() + "_" + position: part[position]})
+                dict_others_sections.update(
+                    {
+                        "section_sections_"
+                        + name.lower()
+                        + "_"
+                        + position: part[position]
+                    }
+                )
     dict_final.update(dict_lists_sections)
     dict_final.update(dict_others_sections)
     dict_final.update(simple_dict)
@@ -222,6 +241,7 @@ def get_features_from_section(sample):
 
 
 # Extraction DATADIRECTORIES column
+
 
 def get_features_from_datadirectories(sample):
     """
@@ -235,12 +255,16 @@ def get_features_from_datadirectories(sample):
     datadir = sample["datadirectories"]
 
     for element in datadir:
-        element_name = element['name']
-        for position in ['size', 'virtual_address']:
-            dict_others_datadir.update({"datadirectories_" + element_name + "_" + position: element[position]})
+        element_name = element["name"]
+        for position in ["size", "virtual_address"]:
+            dict_others_datadir.update(
+                {"datadirectories_" + element_name + "_" + position: element[position]}
+            )
     return dict_others_datadir
 
+
 # Extraction IMPORTS column
+
 
 def get_features_from_imports(sample):
     """
@@ -254,10 +278,11 @@ def get_features_from_imports(sample):
 
     for key in imports.keys():
         functions = imports[key]
-        values = ['imports.' + key.lower() + "-" + f_name for f_name in functions]
+        values = ["imports." + key.lower() + "-" + f_name for f_name in functions]
         functions_list.append(values)
     functions_list = [item for sublist in functions_list for item in sublist]
-    return {'imports': functions_list}
+    return {"imports": functions_list}
+
 
 def write_csv_from_json(csv_file_path, sample_list):
     """
@@ -268,7 +293,7 @@ def write_csv_from_json(csv_file_path, sample_list):
     all_keys = set().union(*(d.keys() for d in sample_list))
 
     try:
-        with open(csv_file_path, 'w') as csvfile:
+        with open(csv_file_path, "w") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=all_keys)
             writer.writeheader()
             for data in sample_list:
@@ -283,19 +308,13 @@ def write_csv(csv_file_path, dataframe):
         csv_file_path: destination path of csv file
         dataframe: dataframe
     """
-    all_keys = set().union(*(d.keys() for d in sample_list))
+    all_keys = set().union(*(d.keys() for d in dataframe))
 
     try:
-        with open(csv_file_path, 'w') as csvfile:
+        with open(csv_file_path, "w") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=all_keys)
             writer.writeheader()
-            for data in sample_list:
+            for data in dataframe:
                 writer.writerow(data)
     except IOError:
         print("I/O error")
-        
-        
-        
-        
-        
-        
