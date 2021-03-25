@@ -1,10 +1,10 @@
 """pipeline"""
 import pandas as pd
-from .flat_data import get_simple_column, get_simple_list_from_column,\
-    get_features_from_dict_column, get_features_from_imports, get_features_from_header,\
+from .flat_data import get_simple_column, get_simple_list_from_column, \
+    get_features_from_dict_column, get_features_from_imports, get_features_from_header, \
     get_features_from_section, get_features_from_datadirectories
 from .flat_general_strings import transform_strings, transform_general
-from .transform_data import transform_section, transform_data_directories,\
+from .transform_data import transform_section, transform_data_directories, \
     transform_byte_entropy, transform_histogram, \
     transform_imports
 
@@ -42,10 +42,10 @@ def run_transformer(data):
     # nothing reduced, this will be reduced in 2nd phase
 
     df_header = df_flat[df_flat.columns[df_flat.columns.str.startswith('header_')]].copy()
-    df_header.fillna(False ,inplace = True)
-    col = df_header.columns[ df_header.columns.str.startswith(\
-                           ('header_coff_characteristics','header_optional_dll'))]
-    df_header.loc[:,col] = df_header.loc[:,col].astype('int64')
+    df_header.fillna(False, inplace=True)
+    col = df_header.columns[
+        df_header.columns.str.startswith(('header_coff_characteristics', 'header_optional_dll'))]
+    df_header.loc[:, col] = df_header.loc[:, col].astype('int64')
 
     # transform strings
     df_strings = transform_strings(df_flat)
