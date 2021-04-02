@@ -37,3 +37,17 @@ def insert_documents(collection: Collection, docs: List[dict]) -> list:
         raise KeyError("Cannot insert to collection `cybersec`")
     result = collection.insert_many(docs)
     return result.inserted_ids
+
+
+def get_sample(collection: Collection, sample_size=50000) -> List[dict]:
+    """
+    Returns sample of `collection` as a list of size `sample_size`.
+
+    Keyword arguments:
+    collection -- name of collection to get documents from
+    sample_size -- size of the sample to return
+    """
+
+    return list(
+        collection.aggregate([{"$sample": {"size": sample_size}}], allowDiskUse=True)
+    )
