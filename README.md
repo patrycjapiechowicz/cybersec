@@ -39,7 +39,7 @@ After graduation I wanted to hobbistically do some project, to know people from 
 <img src="https://www.kindpng.com/picc/m/159-1595924_python-logo-clipart-easy-pandas-python-logo-hd.png" alt="Python Logo Clipart Easy - Pandas Python Logo, HD Png Download@kindpng.com">
 
 
-
+file:///Users/patrycjapiechowicz/Downloads/scikit-learn-seeklogo.com.svg
 
 
 
