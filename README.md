@@ -5,7 +5,7 @@ They regularly (twice per year) give students the opportunity to learn.
 Based on the EMBER dataset - a collection of features from PE Windows files.
 
 The purpose of this project is to identify useful features for Malware Detection.
-I was mainly reponsible for EDA part and my work can be found in ## pati branch as below:
+I was reponsible for exploratory data analysis and modeling. My work can be found in 'pati' branch as below:
 
 https://github.com/patrycjapiechowicz/cybersec/tree/pati/notebooks
 
