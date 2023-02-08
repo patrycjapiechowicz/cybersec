@@ -1,3 +1,6 @@
+### WORK IN ROGRESS
+
+
 # Malware detection system built using the EMBER dataset of 1.1 million PE(Portable Executable) Windows files.
 
 ![image](https://user-images.githubusercontent.com/66388735/217641205-39df832a-c783-48ff-b5b5-7047cc0c3fc3.png)
@@ -29,7 +32,7 @@ After graduation I wanted to hobbistically do some project, to know people from 
 - ### Technical Aspect
 This project is divided into few parts. 
 1. Extracting data using MongoDB. More information can be found here: [MongoDB](https://github.com/patrycjapiechowicz/cybersec/tree/MongoDB-connection/notebooks)
-2. Exploratory Data Analysis. More information can be found here: [EDA](https://github.com/patrycjapiechowicz/cybersec/tree/pati/notebooks) I was mainly responsible for this part.
+2. Exploratory Data Analysis. More information can be found here: [EDA](https://github.com/patrycjapiechowicz/cybersec/tree/pati/notebooks) 
 3. Model training and model evaluation. More information can be found here : [ETL](https://github.com/patrycjapiechowicz/cybersec/tree/ConnectionETL/notebooks) 
 
 - ### Installation
