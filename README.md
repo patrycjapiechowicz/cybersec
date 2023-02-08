@@ -22,6 +22,7 @@ Malware detection system was built based on the EMBER dataset - a collection of 
 - ### Purpose
 The purpose of this project is to identify useful features for Malware Detection. Features include a handpicked selection of 100 PE libraries, boolean file properties (has_imports, has_exports, has_tls, etc.), 64 bytes of the PE entry point (used as a signature), and other features relevant to malware detection.
 
+
 - ### Motivation
 After graduation I wanted to hobbistically do some project, to know people from DS world and that is how I have found FellowshipPL. I was reponsible for exploratory data analysis, model training and model evaluation. My work can be found in 'pati' branch as below:
 
@@ -38,8 +39,7 @@ After graduation I wanted to hobbistically do some project, to know people from 
 
 <img src="https://www.kindpng.com/picc/m/159-1595924_python-logo-clipart-easy-pandas-python-logo-hd.png" alt="Python Logo Clipart Easy - Pandas Python Logo, HD Png Download@kindpng.com">
 
-
-file:///Users/patrycjapiechowicz/Downloads/scikit-learn-seeklogo.com.svg
+![scikit-learn-seeklogo com](https://user-images.githubusercontent.com/66388735/217648821-16755b8d-9637-4209-a3bc-be06b28dddea.svg)
 
 
 
