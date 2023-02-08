@@ -1,5 +1,4 @@
-# Malware detection system built using the EMBER dataset of 1.1 million PE 
-# (Portable Executable) Windows files.
+# Malware detection system built using the EMBER dataset of 1.1 million PE(Portable Executable) Windows files.
 
 ![image](https://user-images.githubusercontent.com/66388735/217641205-39df832a-c783-48ff-b5b5-7047cc0c3fc3.png)
 
@@ -7,8 +6,8 @@
 ## This paper describes many more details about the dataset:  [paper](https://arxiv.org/abs/1804.04637)
 
 
-
-
+## List of contents:
+1. [Overview](./Overview)
 
 
 - ### Overview:
