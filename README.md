@@ -8,7 +8,8 @@
 
 ## List of contents:
 1. [Overview](#Overview)
-
+2. [Purpose](#Purpose)
+3. [Motivation](#Motivation)
 
 - ### Overview
 This project is a part of the Data Science Working Group - FellowshipPL, Krakow.  A group founded by people passionate about Machine Learning. 
