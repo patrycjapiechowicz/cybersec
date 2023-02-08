@@ -12,7 +12,7 @@
 3. [Motivation](#Motivation)
 4. [Technical_Aspect](#Technical Aspect)
 5. [Installation](#Installation)
-6. [Technologies Used](#Technologies)
+6. [Technologies Used](#Technologies #Used)
 
 - ### Overview
 This project is a part of the Data Science Working Group - FellowshipPL, Krakow.  A group founded by people passionate about Machine Learning. 
@@ -31,6 +31,6 @@ After graduation I wanted to hobbistically do some project, to know people from 
 - ### Installation
 - 
 
-- ### Technologies
+- ### Technologies Used
 
 
