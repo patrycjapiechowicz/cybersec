@@ -10,7 +10,7 @@
 1. [Overview](#Overview)
 2. [Purpose](#Purpose)
 3. [Motivation](#Motivation)
-4. [Technical_Aspect](#Technical)
+4. [Technical Aspect](#Technical)
 5. [Installation](#Installation)
 6. [Technologies Used](#Technologies)
 
@@ -32,5 +32,31 @@ After graduation I wanted to hobbistically do some project, to know people from 
 - 
 
 - ### Technologies Used
+
+![image](https://user-images.githubusercontent.com/66388735/217648171-abdb5f02-2dcb-4999-9cb8-95620f046748.png)
+
+
+<img src="https://www.kindpng.com/picc/m/159-1595924_python-logo-clipart-easy-pandas-python-logo-hd.png" alt="Python Logo Clipart Easy - Pandas Python Logo, HD Png Download@kindpng.com">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
