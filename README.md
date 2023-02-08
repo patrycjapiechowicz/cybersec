@@ -27,7 +27,10 @@ The purpose of this project is to identify useful features for Malware Detection
 After graduation I wanted to hobbistically do some project, to know people from DS world and that is how I have found FellowshipPL. I was reponsible for exploratory data analysis, model training and model evaluation. My work can be found in 'pati' branch as below:
 
 - ### Technical Aspect
-
+This project is divided into few parts. 
+1. Extracting data using MongoDB. More information can be found here: [MongoDB](https://github.com/patrycjapiechowicz/cybersec/tree/MongoDB-connection/notebooks)
+2. Exploratory Data Analysis. More information can be found here: [EDA](https://github.com/patrycjapiechowicz/cybersec/tree/pati/notebooks) I was mainly responsible for this part.
+3. Model training and model evaluation. More information can be found here : [ETL](https://github.com/patrycjapiechowicz/cybersec/tree/ConnectionETL/notebooks) 
 
 - ### Installation
 The Code is written in Python 3.7. If you don't have Python installed you can find it [here](https://www.python.org/downloads/). If you are using a lower version of Python you can upgrade using the pip package, ensuring you have the latest version of pip. To install the required packages and libraries, run this command in the project directory after cloning the repository:
