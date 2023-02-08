@@ -42,6 +42,7 @@ After graduation I wanted to hobbistically do some project, to know people from 
 ![scikit-learn-seeklogo com](https://user-images.githubusercontent.com/66388735/217648821-16755b8d-9637-4209-a3bc-be06b28dddea.svg)
 
 
+![image](https://user-images.githubusercontent.com/66388735/217649145-17d3cb18-da3a-4592-95dc-942e2365da53.png)
 
 
 
