@@ -7,10 +7,10 @@
 
 
 ## List of contents:
-1. [Overview](./- ### Overview:)
+1. [Overview](#Overview)
 
 
-- ### Overview:
+- ### Overview
 This project is a part of the Data Science Working Group - FellowshipPL, Krakow.  A group founded by people passionate about Machine Learning. 
 They regularly (twice per year) give students the opportunity to learn.
 Malware detection system was built based on the EMBER dataset - a collection of features from PE Windows files.
