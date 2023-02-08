@@ -14,18 +14,22 @@
 5. [Installation](#Installation)
 6. [Technologies Used](#Technologies Used)
 
-- ### Overview:
+- ### Overview
 This project is a part of the Data Science Working Group - FellowshipPL, Krakow.  A group founded by people passionate about Machine Learning. 
 They regularly (twice per year) give students the opportunity to learn.
 Malware detection system was built based on the EMBER dataset - a collection of features from PE Windows files.
 
-- ### Purpose:
+- ### Purpose
 The purpose of this project is to identify useful features for Malware Detection. Features include a handpicked selection of 100 PE libraries, boolean file properties (has_imports, has_exports, has_tls, etc.), 64 bytes of the PE entry point (used as a signature), and other features relevant to malware detection.
 
-- ### Motivation:
+- ### Motivation
 After graduation I wanted to hobbistically do some project, to know people from DS world and that is how I have found FellowshipPL. I was reponsible for exploratory data analysis, model training and model evaluation. My work can be found in 'pati' branch as below:
 
--### Technical Aspect
+- ### Technical Aspect
 
+
+- ### Installation
+
+- ### Technologies Used
 
 
