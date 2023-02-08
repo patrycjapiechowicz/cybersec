@@ -1,4 +1,4 @@
-### WORK IN ROGRESS
+### WORK IN PROGRESS
 
 
 # Malware detection system built using the EMBER dataset of 1.1 million PE(Portable Executable) Windows files.
