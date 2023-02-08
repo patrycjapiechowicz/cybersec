@@ -5,7 +5,7 @@
 
 Table of Content:
 
-<a href=”https://arxiv.org/abs/1804.04637”>paper</a>
+[LINK](https://arxiv.org/abs/1804.04637)
 
 
 
