@@ -1,4 +1,4 @@
-Project Name - Cybersec.  
+## Malware detection system built using the EMBER dataset of 1.1 million PE Windows files.
 
 ![image](https://user-images.githubusercontent.com/66388735/217641205-39df832a-c783-48ff-b5b5-7047cc0c3fc3.png)
 
